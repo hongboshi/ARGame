@@ -1,0 +1,129 @@
+
+message CLoginReqC2S
+{
+	required int64 uid					= 1;//用户id
+	required string session			    = 2;//认证字符窜
+	optional int32 actorID				= 3;
+	optional string nickname 			= 4;
+}
+
+message CLoginRespS2C
+{
+	required int64 uid					= 1;//用户id
+	required int32 result				= 2;//结果
+	optional string errcode				= 3;//错误描述
+}
+
+//场景玩家信息
+message PlayerInfo_T
+{
+	required int64 uid				= 1;//用户id
+	optional int32 actorID 			= 2;
+	optional string nickname 		= 3;
+	optional float x_pos	        = 4;
+	optional float y_pos       		= 5;
+	optional float z_pos          	= 6;
+	optional float x_ang			= 7;
+	optional float y_ang			= 8;
+	optional float z_ang			= 9;
+	optional int32 origin			= 10;
+}
+
+message CEnterRoomReqC2S
+{
+	required int64 uid					= 1;//用户id
+	optional string pwd					= 2;//pwd
+	optional int32 rflag				= 3;//room flag
+	optional int32 rid					= 4;//room id
+}
+
+message CEnterRoomRespS2C
+{
+	required int64 uid					= 1;//用户id
+	required int32 result				= 2;//结果
+	optional string errcode				= 3;//错误描述
+	optional int32 rid					= 4;//room id
+	optional string URL					= 5;//url
+	repeated PlayerInfo_T stPlayerInfos = 6;//player info
+}
+
+message CNotifyEnterRoomS2C
+{
+	required int32 rid					= 1;//room id
+	required PlayerInfo_T stPlayerInfo 	= 2;//player info
+}
+
+message CCreateRoomReqC2S
+{
+	required int64 uid 				= 1;
+	required int32 type 			= 2;
+	required int32 confid 			= 3;
+	optional int32 usrmax 			= 4;
+	optional string name 			= 5;
+	optional string pwd 			= 6;
+	optional string desc 			= 7;
+}
+
+message CCreateRoomRespS2C
+{
+	required int64 uid				= 1;//用户id
+	required int32 result 			= 2;
+	optional int32 rid 				= 3;
+	optional string errcode 		= 4;
+	optional PlayerInfo_T stPlayerInfo = 5;
+}
+
+message RoomInfo_T
+{
+	required int32  rid	 			= 1;
+	optional int64  owner	 		= 2;
+	required int32  usrMax	 		= 3;
+	required int32  type			= 4;//类型
+	required int32  confid	 		= 5;
+	required int32  usrNum	 		= 6;
+	optional int32  state 			= 7;
+	optional int32  pwdlmt 			= 8;//pwd 0:无 1:有
+	optional string ownernick 		= 9;
+	optional string name 			= 10;
+	optional string desc 			= 11;
+	optional string image 			= 12;
+}
+message CGetRoomListReqC2S
+{
+	required int64   uid            = 1;
+}
+message CGetRoomListRespS2C
+{
+	required int64   uid            = 1;
+	required int32   result         = 2;
+	optional string  errcode      	= 3;
+	repeated RoomInfo_T roomlist    = 4;
+}
+
+message CLeaveRoomReqC2S
+{
+	required int64   uid            = 1;
+}
+
+message CLeaveRoomRespS2C
+{
+	required int64   uid            = 1;
+	required int32   rid	 		= 2;
+	required int32   result         = 3;
+}
+
+message CNotifyLeaveRoomS2C
+{
+	required int64   uid            = 1;
+	required int32   rid	 		= 2;
+}
+
+message CGetAgoraAppidReq
+{
+	required int64 uid				= 1;
+}
+
+message CGetAgoraAppidResp
+{
+  required string appid = 1;
+}

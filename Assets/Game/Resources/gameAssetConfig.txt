@@ -1,0 +1,1 @@
+gameassets|egg1,egg2;scene1|a,b;scene2|c,d;

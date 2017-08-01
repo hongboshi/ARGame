@@ -1,0 +1,56 @@
+message ST_CMsgAccountLoginRequest{
+	optional string account				= 1;//用户账户
+	optional string password			= 2;//用户密码
+}
+message ST_CMsgAccountLoginResponse{
+	optional int32 result 				= 1;//回复结果
+	optional int64 uid					= 2;//用户ID
+	optional string sessionkey			= 3;//用户key
+}
+
+
+message ST_CMsgGuestLoginRequest{
+	optional string identify			= 1;//识别码
+}
+message ST_CMsgGuestLoginResponse{
+	optional int32 result 				= 1;//回复结果
+	optional int64 uid					= 2;//用户ID
+	optional string sessionkey			= 3;//用户key
+}
+
+message ST_CMsgAccountRegistRequest{
+	optional string account 			= 1;//注册账户
+	optional string password			= 2;//注册密码1
+}
+message ST_CMsgAccountRegistResponse{
+	optional int32 result 				= 1;//回复结果
+	optional int64 uid					= 2;//用户ID
+	optional string sessionkey			= 3;//用户key
+}
+
+message ST_CMsgGetLogicAddrRequest{
+	optional int32 svrtype		= 1;
+}
+message ST_CMsgGetLogicAddrResponse{
+	optional int32 svrtype		= 1;
+	optional string addr 		= 2;
+	optional int32  port		= 3;
+}
+
+message ST_RoleInfoRequest{}
+message ST_RoleInfoResponse{
+	optional int64 uid					= 1;//角色ID
+	optional string nickname 			= 2;//昵称
+	optional string declaration 		= 3;//宣言
+	optional int32 sex					= 4;//性别
+	optional int32 head_id				= 5;//头部id
+	optional int32 hand_id				= 6;//手部id
+	optional int32 body_id				= 7;//身体id
+	optional int32 head_decid			= 8;//头饰id
+	optional int32 jacketid				= 9;//上衣id
+	optional int32 trousersid			= 10;//下身id
+	optional int32 shoesid				= 11;//鞋子id
+	optional int32 headiconid			= 12;//头像id
+	optional int32 state				= 13;//角色状态
+	optional int32 priority				= 14;//
+}

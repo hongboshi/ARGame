@@ -1,0 +1,63 @@
+﻿using UnityEngine;
+using System.Collections.Generic;
+namespace SimpleFramework
+{
+    public class SceneMgr
+    {
+        private static Dictionary<string, ISceneState> sceneStateDic = new Dictionary<string, ISceneState>();
+        public static SceneStateController mController { get; private set; }
+        public SceneMgr()
+        {
+            initScenes();
+            mController = new SceneStateController();
+            mController.SetState(new StartScene_State(mController), "");
+        }
+
+        private string curSceneName = "";
+        public string CurSceneName
+        {
+            get { return curSceneName; }
+        }
+        private string lastSceneName = "";
+        public string LastSceneName
+        {
+            get { return lastSceneName; }
+        }
+
+        public int SceneCount { get { return UnityEngine.SceneManagement.SceneManager.sceneCount; } }
+        public UnityEngine.SceneManagement.Scene this[int index] { get { return  UnityEngine.SceneManagement.SceneManager.GetSceneAt(index); } } 
+        public void LoadScene(string loadSceneName)
+        {
+            if (sceneStateDic.ContainsKey(loadSceneName))
+            {
+                ISceneState scenestate = sceneStateDic[loadSceneName];
+                if (scenestate != null)
+                {
+                    lastSceneName = curSceneName;
+                    curSceneName = loadSceneName;
+                    mController.SetState(scenestate, loadSceneName);
+                }
+            }
+        }
+
+        void initScenes()
+        {
+            //场景初始化
+            sceneStateDic.Add("start", new StartScene_State(mController));
+       //     sceneStateDic.Add("login", new LoginScene_State(mController));      
+          //  sceneStateDic.Add("")
+        }
+        //添加到管理器
+        public void RegiestScene(string sname, ISceneState scenestate)
+        {
+            if (!sceneStateDic.ContainsKey(sname))
+                sceneStateDic.Add(sname, scenestate);
+        }
+        //
+        public void RemoveGameScene(string sname)
+        {
+            if (!sceneStateDic.ContainsKey(sname))
+                sceneStateDic.Remove(sname);
+        }
+    }
+}

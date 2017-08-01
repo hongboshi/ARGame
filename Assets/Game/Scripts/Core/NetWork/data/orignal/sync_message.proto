@@ -1,0 +1,82 @@
+message CMoveInfo
+{
+	required int64 uid = 1;
+	required int32 dtype = 2;
+	optional int32 animID = 3;
+	optional JoinInfo_T body = 4;
+	optional JoinInfo_T neck = 5;
+	optional HandInfo_T leftHand = 6;
+	optional HandInfo_T rightHand = 7;
+}
+
+message JoinInfo_T
+{
+	optional float pos_x = 1;
+	optional float pos_y = 2;
+	optional float pos_z = 3;
+	optional float ang_x = 4;
+	optional float ang_y = 5;
+	optional float ang_z = 6;
+}
+
+message HandInfo_T
+{
+	optional JoinInfo_T palm = 1;
+	optional JoinInfo_T thumb_1 = 2;
+	optional JoinInfo_T thumb_2 = 3;
+	optional JoinInfo_T thumb_3 = 4;	
+	optional JoinInfo_T index_1 = 5;
+	optional JoinInfo_T index_2 = 6;
+	optional JoinInfo_T index_3 = 7;
+	optional JoinInfo_T middle_1 = 8;
+	optional JoinInfo_T middle_2 = 9;
+	optional JoinInfo_T middle_3 = 10;
+	optional JoinInfo_T ring_1 = 11;
+	optional JoinInfo_T ring_2 = 12;
+	optional JoinInfo_T ring_3 = 13;
+	optional JoinInfo_T pinky_1 = 14;
+	optional JoinInfo_T pinky_2 = 15;	
+	optional JoinInfo_T pinky_3 = 16;
+}
+
+//同步表情
+message CExpressionInfo
+{
+	required int64 uid				= 1;
+	required int32 id				= 2;
+}
+
+//同步道具
+message CPlaytoyInfo
+{
+	required int64 uid				= 1;
+	required int32 id				= 2;
+	required float pos_x            = 3;
+	required float pos_y            = 4;
+	required float pos_z            = 5;
+	required string none            = 6;
+}
+
+//同步URL
+message CShareUrlInfo
+{
+	required int64 uid				= 1;
+	required string URL				= 2;
+}
+
+//同步信息
+message CSyncInfo
+{
+	required int64 uid				= 1;
+	required int32 type				= 2;
+	required string data			= 3;
+}
+
+//to uid信息
+message CNotifyInfo
+{
+	required int64 fuid				= 1;
+	required int64 tuid				= 2;
+	required int32 type				= 3;
+	required string data			= 4;
+}
