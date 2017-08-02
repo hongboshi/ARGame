@@ -11,7 +11,8 @@ namespace SimpleFramework
         private GlobalEntity gEntity;
         public Facade()
         {
-           
+            managerDic = new Dictionary<string, object>();
+            gEntity = new GlobalEntity();
         }
         private GameObject _gGameobject;
         public GameObject gGameObject
@@ -83,12 +84,30 @@ namespace SimpleFramework
         void InitFramework()
         {
             Debug.Log("启动框架");
-            managerDic = new Dictionary<string, object>();
-            gEntity = new GlobalEntity();
             GetMgr<ControllerManager>().Init();
             GetMgr<ModelManager>().Init();
             GetMgr<GameManager>();
             GetMgr<SceneMgr>();
         }
+
+        //Log
+        //public void Log(BugType type, string str)
+        //{
+        //    Dispath(AppEvent.appLog, type, str);
+        //    debugRecord(str, type);
+        //}
+        void debugRecord(string str, BugType type)
+        {
+            if (AppConst.openDebugRecord)
+            {
+
+            }
+        }
+    }
+    public enum BugType
+    {
+        log,
+        warning,
+        error,
     }
 }

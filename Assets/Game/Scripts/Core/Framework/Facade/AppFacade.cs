@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using SimpleFramework;
 using SimpleFramework.Game;
+
+public enum AppEvent
+{
+    appLog,
+}
 public class AppFacade :Facade 
 {
+
     #region 变量
     private static AppFacade _ins;
     public static AppFacade Ins {
@@ -16,6 +22,7 @@ public class AppFacade :Facade
     public override void StartUp()
     {
         base.StartUp();
-        GetMgr<GameManager>().GetGame(GameEnum.mainLobby).StartUp();
+      
     }
+
 }

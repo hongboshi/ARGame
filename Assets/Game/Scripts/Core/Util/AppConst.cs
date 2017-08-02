@@ -2,14 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// </summary>
 public static class AppConst
 {
     public static string serAddr;
     public static string serPort;
+    //编辑模式下
     public static bool isEditorDebug {
         get {
             return true;
         }
+    }
+    public static bool openDebugRecord
+    {
+        get { return true; }
     }
     public static RuntimePlatform Platform
     {

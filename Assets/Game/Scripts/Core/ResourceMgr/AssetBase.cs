@@ -32,7 +32,10 @@ namespace SimpleFramework
                 Debug.LogError("curAssetVersion null");
             }
             else
+            {
                 Debug.Log("本地资源版本号：" + curAssetVersion.assetVersion);
+            //    AppFacade.Ins.Log(BugType.log, "本地资源版本号"+ curAssetVersion.assetVersion);
+            }
             loader = new AssetBundleLoader();
         }
         //资源初始化
@@ -72,6 +75,7 @@ namespace SimpleFramework
             {
                 AssetbundleHelp.UnLoadBundles();
                 UnityEngine.Debug.Log("没有要更新的资源");
+          //      AppFacade.Ins.Log(BugType.log, "没有要更新的资源");
                 if (whenOver != null)
                     whenOver(true);
             }

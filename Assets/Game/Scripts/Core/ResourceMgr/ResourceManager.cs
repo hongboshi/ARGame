@@ -20,6 +20,7 @@ namespace SimpleFramework
         public void UpdateAssets(System.Action<bool> whenOver = null)
         {
             Debug.Log("更新资源");
+           // AppFacade.Ins.Log(BugType.log, "更新资源");
             AssetsInit((bool result) =>
             {
                 isDownloadOver = result;

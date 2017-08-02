@@ -12,6 +12,7 @@ namespace SimpleFramework
             mController = new SceneStateController();
             mController.SetState(new StartScene_State(mController), "");
             Debug.Log("场景管理器初始化");
+           // AppFacade.Ins.Log(BugType.log, "场景管理器初始化");
         }
 
         private string curSceneName = "";

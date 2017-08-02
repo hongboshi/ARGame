@@ -22,6 +22,7 @@ namespace SimpleFramework.Game
             gameDic.Add(GameEnum.d, new Game_d(GameType.NonAR, GameEnum.d));
             gameDic.Add(GameEnum.e, new Game_e(GameType.NonAR, GameEnum.e));
             Debug.Log("游戏管理器初始化");
+          //  AppFacade.Ins.Log(BugType.log, "游戏管理器初始化");
         }
         #endregion
         //当前正在运行的游戏

@@ -43,6 +43,7 @@ namespace SimpleFramework
         public void Init()
         {
             Debug.Log("controller模块初始化");
+           // AppFacade.Ins.Log(BugType.log, "controller模块初始化");
         }
     }
 }

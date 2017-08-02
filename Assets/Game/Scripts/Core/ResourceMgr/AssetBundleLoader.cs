@@ -271,6 +271,7 @@ namespace SimpleFramework
             }
             rememberDic.Clear();
             Debug.Log("abbundle包卸载完毕");
+         //   AppFacade.Ins.Log(BugType.log, "abbundle包卸载完毕");
         }
     }
 }

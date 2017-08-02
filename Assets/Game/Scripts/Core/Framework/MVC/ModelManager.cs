@@ -46,6 +46,7 @@ namespace SimpleFramework
         }
         public void Init()
         {
+          //  AppFacade.Ins.Log(BugType.log, "Model模块初始化");
             Debug.Log("Model模块初始化");
         }
     }

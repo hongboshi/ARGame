@@ -7,35 +7,55 @@ using SimpleFramework.Game;
 
 public class StartUp : MonoBehaviour {
 
-    public enum vEvent
-    {
-        vMoviePlayOver, //视频播放完毕
-    }
-
     public string serAddr;
     public string serPort;
+    public Text tipArea;
     public float startMovieTime;  //启动视频的时长
     private AppMovie startMovie;
     void Awake()
     {
         AppConst.serPort = serAddr;
-       AppConst.serPort = serPort;
+        AppConst.serPort = serPort;
     }
 
 	// Use this for initialization
 	void Start () {
-        AppFacade.Ins.StartUp();   //启动框架
+        AppFacade.Ins.AddListener(AppEvent.appLog, UpdateTips);
+        AppFacade.Ins.StartUp();   //启动框架    
+        //更新资源
+        AppFacade.Ins.GetMgr<ResourceManager>().UpdateAssets(result => {
+            isResourceLoadOver = result;
+            OnLoadOver();
+        });
         startMovie = new AppMovie(startMovieTime);   //播放开始动画
-        AppFacade.Ins.AddListener(vEvent.vMoviePlayOver, OnLoadOver);
         startMovie.Play(() =>
         {
-            AppFacade.Ins.Dispath(vEvent.vMoviePlayOver);
-        });
-      //  OnLoadOver(null);
+            isMovieOver = true;
+            OnLoadOver();
+        });     
     }
+    private void OnDestroy()
+    {
+        AppFacade.Ins.RemoveListener(AppEvent.appLog, UpdateTips);
+    }
+
+    void UpdateTips(params object[] objs)
+    {
+        if (objs.Length == 2)
+        {
+            BugType bt = (BugType)objs[0];
+            string msg = (string)objs[1];
+            if (tipArea != null)
+                tipArea.text += msg+"\n";
+        }
+    }
+
+    bool isMovieOver = false;
+    bool isResourceLoadOver = false;
     void OnLoadOver(params object[] objs)
     {
-        AppFacade.Ins.GetMgr<GameManager>().GetGame(GameEnum.mainLobby).StartUp();
+        if(isMovieOver && isResourceLoadOver)
+            AppFacade.Ins.GetMgr<GameManager>().GetGame(GameEnum.mainLobby).StartUp();
     }
 }
 
