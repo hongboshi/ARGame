@@ -34,6 +34,7 @@ public class StartUp : MonoBehaviour {
     private void OnDestroy()
     {
         AppFacade.Ins.RemoveListener(AppEvent.appLog, UpdateTips);
+        AppFacade.Ins.RemoveListener(AppEvent.resLoadOver, OnResLoadOver);
     }
 
     void UpdateTips(params object[] objs)

@@ -6,22 +6,33 @@ namespace SimpleFramework
 {
     public sealed class ControllerManager
     {
-        private Dictionary<string, Controller> cDic;
         private static ControllerManager _ins;
-        private static ControllerManager ins { get { if (_ins == null) _ins = new ControllerManager(); return _ins; } }
+        private Dictionary<string, Controller> cDic;
         public static T GetController<T>() where T : Controller
         {
             try
             {
-                return (T)ins.getC(typeof(T));
+                return (T)_ins.getC(typeof(T));
             }
             catch
             {
                 return null;
             }
         }
+        //public T GetController<T>() where T : Controller
+        //{
+        //    try
+        //    {
+        //        return (T)getC(typeof(T));
+        //    }
+        //    catch
+        //    {
+        //        return null;
+        //    }
+        //}
         public ControllerManager()
         {
+            _ins = this;
             cDic = new Dictionary<string, Controller>();
         }
         Controller getC(System.Type type)
@@ -43,7 +54,6 @@ namespace SimpleFramework
         public void Init()
         {
             Debug.Log("controller模块初始化");
-           // AppFacade.Ins.Log(BugType.log, "controller模块初始化");
         }
     }
 }

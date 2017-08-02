@@ -7,20 +7,17 @@ namespace SimpleFramework
     public sealed class ModelManager
     {
         private static ModelManager _ins;
-        private static ModelManager Ins
-        {
-            get { if (_ins == null) _ins = new ModelManager(); return _ins; }
-        }
         private Dictionary<string, Model> mDic;
         public ModelManager()
         {
+            _ins = this;
             mDic = new Dictionary<string, Model>();
         }
         public static T GetModel<T>() where T : Model
         {
             try
             {
-                return (T)Ins.getModel(typeof(T));
+                return (T)_ins.getModel(typeof(T));
             }
             catch
             {
@@ -46,7 +43,6 @@ namespace SimpleFramework
         }
         public void Init()
         {
-          //  AppFacade.Ins.Log(BugType.log, "Model模块初始化");
             Debug.Log("Model模块初始化");
         }
     }
