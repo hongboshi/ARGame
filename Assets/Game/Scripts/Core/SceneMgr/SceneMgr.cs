@@ -11,6 +11,7 @@ namespace SimpleFramework
             initScenes();
             mController = new SceneStateController();
             mController.SetState(new StartScene_State(mController), "");
+            Debug.Log("场景管理器初始化");
         }
 
         private string curSceneName = "";
@@ -54,7 +55,7 @@ namespace SimpleFramework
                 sceneStateDic.Add(sname, scenestate);
         }
         //
-        public void RemoveGameScene(string sname)
+        public void UnRegiestScene(string sname)
         {
             if (!sceneStateDic.ContainsKey(sname))
                 sceneStateDic.Remove(sname);

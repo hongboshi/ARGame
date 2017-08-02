@@ -42,7 +42,7 @@ namespace SimpleFramework
         //初始化
         public void Init()
         {
-
+            Debug.Log("controller模块初始化");
         }
     }
 }

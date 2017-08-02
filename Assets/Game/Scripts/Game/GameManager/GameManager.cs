@@ -21,6 +21,7 @@ namespace SimpleFramework.Game
             gameDic.Add(GameEnum.c, new Game_c(GameType.NonAR, GameEnum.c));
             gameDic.Add(GameEnum.d, new Game_d(GameType.NonAR, GameEnum.d));
             gameDic.Add(GameEnum.e, new Game_e(GameType.NonAR, GameEnum.e));
+            Debug.Log("游戏管理器初始化");
         }
         #endregion
         //当前正在运行的游戏
@@ -36,12 +37,6 @@ namespace SimpleFramework.Game
             IGameBase gbase = null;
             gameDic.TryGetValue(gname, out gbase);
             return gbase;
-        }
-        public T GetGame<T>(string gname) where T:IGameBase
-        {
-            IGameBase t = null;
-            gameDic.TryGetValue(gname, out t);
-            return t as T;
         }
     }
 }

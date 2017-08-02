@@ -18,9 +18,4 @@ public class Game_MainLobby : IGameBase
             return new string[] {"mainLobby" };
         }
     }
-
-    protected override void RegiestScene()
-    {
-        AppFacade.Ins.GetMgr<SceneMgr>().RegiestScene(sceneName[0], new MainScene_State(SceneMgr.mController));
-    }
 }

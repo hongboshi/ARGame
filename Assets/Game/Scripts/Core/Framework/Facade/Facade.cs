@@ -11,8 +11,7 @@ namespace SimpleFramework
         private GlobalEntity gEntity;
         public Facade()
         {
-            managerDic = new Dictionary<string, object>();
-            gEntity = new GlobalEntity();
+           
         }
         private GameObject _gGameobject;
         public GameObject gGameObject
@@ -34,11 +33,7 @@ namespace SimpleFramework
         }
         public virtual void StartUp()
         {
-
-            GetMgr<ControllerManager>().Init();
-            GetMgr<ModelManager>().Init();
-            GetMgr<GameManager>();
-            GetMgr<SceneMgr>();
+            InitFramework();
         }
         #region 获取管理器
         public T GetMgr<T>() where T : class
@@ -84,6 +79,16 @@ namespace SimpleFramework
         public void SendCommand()
         {
 
+        }
+        void InitFramework()
+        {
+            Debug.Log("启动框架");
+            managerDic = new Dictionary<string, object>();
+            gEntity = new GlobalEntity();
+            GetMgr<ControllerManager>().Init();
+            GetMgr<ModelManager>().Init();
+            GetMgr<GameManager>();
+            GetMgr<SceneMgr>();
         }
     }
 }

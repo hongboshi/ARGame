@@ -39,11 +39,18 @@ namespace SimpleFramework.Game
             RegiestScene();
         }
 
-        protected virtual void RegiestScene()
+        void RegiestScene()
         {
             for (int i = 0; i < sceneName.Length; i++)
             {
-                AppFacade.Ins.GetMgr<SceneMgr>().RegiestScene(sceneName[i], new ISceneState(SceneMgr.mController));
+                AppFacade.Ins.GetMgr<SceneMgr>().RegiestScene(sceneName[i], new ISceneState(SceneMgr.mController));               
+            }
+        }
+        void UnRegiestScene()
+        {
+            for (int i = 0; i < sceneName.Length; i++)
+            {
+                AppFacade.Ins.GetMgr<SceneMgr>().UnRegiestScene(sceneName[i]);
             }
         }
 
@@ -71,12 +78,12 @@ namespace SimpleFramework.Game
         internal void UnLoad()
         {
             Debug.Log("卸载游戏" + gameName);
+            UnRegiestScene();
             OnUnLoad();
         }
         //卸载回调
         protected virtual void OnUnLoad()
         {
-
         }
     }
 }

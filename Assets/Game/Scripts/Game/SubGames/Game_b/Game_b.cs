@@ -15,9 +15,4 @@ public class Game_b :IGameBase
             return new string[] { "Demo Scene" };
         }
     }
-
-    protected override void RegiestScene()
-    {
-        AppFacade.Ins.GetMgr<SceneMgr>().RegiestScene(sceneName[0], new DemoSceneState(SceneMgr.mController));
-    }
 }

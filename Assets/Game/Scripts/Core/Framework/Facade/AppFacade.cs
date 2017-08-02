@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SimpleFramework;
+using SimpleFramework.Game;
 public class AppFacade :Facade 
 {
     #region 变量
@@ -15,5 +16,6 @@ public class AppFacade :Facade
     public override void StartUp()
     {
         base.StartUp();
+        GetMgr<GameManager>().GetGame(GameEnum.mainLobby).StartUp();
     }
 }

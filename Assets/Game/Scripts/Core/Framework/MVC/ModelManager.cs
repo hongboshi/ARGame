@@ -45,6 +45,8 @@ namespace SimpleFramework
             return m;
         }
         public void Init()
-        { }
+        {
+            Debug.Log("Model模块初始化");
+        }
     }
 }
