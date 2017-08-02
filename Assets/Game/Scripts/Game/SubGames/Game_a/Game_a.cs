@@ -12,7 +12,7 @@ public class Game_a :IGameBase
     {
         get
         {
-            return new string[] {"GunShot_1"};
+            return new string[] {"xiyouji"};
         }
     }
 }

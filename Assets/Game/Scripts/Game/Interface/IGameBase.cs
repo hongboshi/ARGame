@@ -39,7 +39,7 @@ namespace SimpleFramework.Game
             RegiestScene();
         }
 
-        void RegiestScene()
+        protected virtual void RegiestScene()
         {
             for (int i = 0; i < sceneName.Length; i++)
             {

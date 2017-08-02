@@ -12,7 +12,7 @@ public class Game_b :IGameBase
     {
         get
         {
-            return new string[] { "Demo Scene" };
+            return new string[] { "dpcq" };
         }
     }
 }

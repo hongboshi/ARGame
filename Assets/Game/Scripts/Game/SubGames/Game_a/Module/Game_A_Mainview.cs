@@ -4,21 +4,17 @@ using UnityEngine;
 using SimpleFramework;
 using UnityEngine.UI;
 
-public class MainView :BaseView
+public class Game_A_Mainview :BaseView
 {
     public enum vEvent
     {
         vBack,
         vFire,
     }
-    public GameObject gunObj;
-    public GameObject bullet;
-    private Gun gun;
     protected override void Awake()
     {
         base.Awake();
-        SetEntity(ControllerManager.GetController<MainController>());
-        gun = new Gun(gunObj, bullet);
+        SetEntity(ControllerManager.GetController<Game_A_Controller>());
     }
     protected override void OnOpen(Object param = null)
     {
@@ -28,8 +24,6 @@ public class MainView :BaseView
     {
         if (Input.GetKeyUp(KeyCode.Escape))
             Back();
-        if (Input.GetMouseButtonDown(0))
-            Fire();
     }
     protected override void OnClicked(Button sender)
     {
@@ -40,16 +34,10 @@ public class MainView :BaseView
                 Back();
                 break;
             case "Fire":
-                Fire();
                 break;
             default:
                 break;
         }
-    }
-
-    void Fire()
-    {
-        gun.Shut();
     }
     void Back()
     {

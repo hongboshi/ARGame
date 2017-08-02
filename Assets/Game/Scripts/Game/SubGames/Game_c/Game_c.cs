@@ -13,7 +13,7 @@ public class Game_c :IGameBase
     {
         get
         {
-            return new string[] { "" };
+            return new string[] { "zhanLang" };
         }
     }
 }

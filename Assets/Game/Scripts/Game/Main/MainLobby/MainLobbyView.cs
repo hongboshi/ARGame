@@ -26,9 +26,8 @@ public class MainLobbyView : BaseView
         GameItem gi = sender.GetComponent<GameItem>();
         if (gi != null)
         {
-            IGameBase gb = AppFacade.Ins.GetMgr<GameManager>().GetGame(gi.data.name);
+            IGameBase gb = AppFacade.Ins.GetMgr<GameManager>().GetGame(gi.data.title);
             if (gb != null) gb.StartUp();
-            Debug.Log("启动游戏："+gi.data.title);
             return;
         }
         if (name.Contains("Setting"))

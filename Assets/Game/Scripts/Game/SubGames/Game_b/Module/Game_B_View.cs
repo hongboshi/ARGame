@@ -4,7 +4,7 @@ using UnityEngine;
 using SimpleFramework;
 using UnityEngine.UI;
 
-public class NatureView : BaseView {
+public class Game_B_View : BaseView {
 
     public enum vEvent
     {
@@ -13,7 +13,7 @@ public class NatureView : BaseView {
     protected override void Awake()
     {
         base.Awake();
-        SetEntity(ControllerManager.GetController<NatureController>());
+        SetEntity(ControllerManager.GetController<Game_B_Controller>());
     }
 
     protected override void OnClicked(Button sender)
