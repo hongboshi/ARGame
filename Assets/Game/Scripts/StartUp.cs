@@ -20,13 +20,10 @@ public class StartUp : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        AppFacade.Ins.AddListener(AppEvent.appLog, UpdateTips);
+        AppFacade.Ins.AddListener(AppEvent.appLog, UpdateTips);  //debug重定向
+        AppFacade.Ins.AddListener(AppEvent.resLoadOver, OnResLoadOver);  //监听资源更新结果
         AppFacade.Ins.StartUp();   //启动框架    
-        //更新资源
-        AppFacade.Ins.GetMgr<ResourceManager>().UpdateAssets(result => {
-            isResourceLoadOver = result;
-            OnLoadOver();
-        });
+
         startMovie = new AppMovie(startMovieTime);   //播放开始动画
         startMovie.Play(() =>
         {
@@ -51,11 +48,18 @@ public class StartUp : MonoBehaviour {
     }
 
     bool isMovieOver = false;
-    bool isResourceLoadOver = false;
-    void OnLoadOver(params object[] objs)
+    bool isResLoadOver = false;
+    void OnLoadOver()
     {
-        if(isMovieOver && isResourceLoadOver)
+        if(isMovieOver && isResLoadOver)
             AppFacade.Ins.GetMgr<GameManager>().GetGame(GameEnum.mainLobby).StartUp();
+    }
+    void OnResLoadOver(params object[] objs)
+    {
+        bool result = (bool)objs[0];
+        isResLoadOver = result;
+        if (!isResLoadOver) Debug.LogError("res down load error");
+        OnLoadOver();
     }
 }
 

@@ -1,6 +1,6 @@
 ﻿using LitJson;
 
-namespace Plates.Client.Net
+namespace SimpleFramework.Net
 {
     class VoiceProtocolHandler : BaseJsonProtocolHandler
     {

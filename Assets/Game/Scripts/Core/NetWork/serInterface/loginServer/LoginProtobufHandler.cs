@@ -5,7 +5,7 @@ using proto.loginmsg;
 using proto.scene_message;
 using proto.actormsg;
 
-namespace Plates.Client.Net
+namespace SimpleFramework.Net
 {
     partial class LoginProtobufHandler : BaseProtoBufProtocolHandler
     {

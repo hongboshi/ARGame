@@ -9,7 +9,7 @@ using msgserver.talk_message;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace Plates.Client.Net
+namespace SimpleFramework.Net
 {
     partial class MsgProtocolHandler : BaseProtoBufProtocolHandler
     {

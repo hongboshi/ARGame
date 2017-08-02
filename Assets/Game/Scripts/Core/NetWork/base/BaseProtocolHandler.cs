@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Plates.Client.Net
+namespace SimpleFramework.Net
 {
     struct NetObject
     {

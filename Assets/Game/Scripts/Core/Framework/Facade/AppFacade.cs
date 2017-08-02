@@ -6,7 +6,10 @@ using SimpleFramework.Game;
 
 public enum AppEvent
 {
-    appLog,
+    appLog,  //log
+    resLoadOver,   //资源更新完毕
+
+
 }
 public class AppFacade :Facade 
 {
@@ -21,8 +24,11 @@ public class AppFacade :Facade
     #endregion
     public override void StartUp()
     {
-        base.StartUp();
-      
+        base.StartUp();  
+        //更新资源
+        AppFacade.Ins.GetMgr<ResourceManager>().UpdateAssets(result => {
+            Dispath(AppEvent.resLoadOver, result);  //消息通知出去
+        });
     }
 
 }

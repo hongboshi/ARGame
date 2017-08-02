@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using friendserver.friend_message;
 using msgserver.talk_message;
 
-namespace Plates.Client.Net
+namespace SimpleFramework.Net
 {
     partial class FriendProtobufHandler : BaseProtoBufProtocolHandler
     {

@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-namespace Plates.Client.Net
+namespace SimpleFramework.Net
 {
     class TcpProtocol : IBaseProtocol
     {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using LitJson;
 
-namespace Plates.Client.Net
+namespace SimpleFramework.Net
 {
     class BaseJsonProtocolHandler : BaseProtocolHandler
     {

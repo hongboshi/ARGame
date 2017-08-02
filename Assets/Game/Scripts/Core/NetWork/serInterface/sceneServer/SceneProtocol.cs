@@ -2,7 +2,7 @@
 using proto.sync_message;
 using UnityEngine;
 
-namespace Plates.Client.Net
+namespace SimpleFramework.Net
 {
     partial class SceneProtocolHandler : BaseProtoBufProtocolHandler
     {

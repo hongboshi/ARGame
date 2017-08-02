@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-namespace Plates.Client.Net
+namespace SimpleFramework.Net
 {
     class TcpAsyncClient : IDisposable
     {
