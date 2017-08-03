@@ -11,7 +11,7 @@ namespace SimpleFramework
         }
         public static string assetPath_local       //本地资源地址
         {
-            get { return Application.streamingAssetsPath + "/Assetbundls"; }
+            get { return Application.streamingAssetsPath + "/Assetbundls/"+curPlatformFloder; }
         }
         public static string manifest_name         //AssetbundleManifest name
         {

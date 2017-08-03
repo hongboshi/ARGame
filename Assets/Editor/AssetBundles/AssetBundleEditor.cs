@@ -15,11 +15,8 @@ namespace SimpleFramework
             {
                 if (_manifest == null)
                 {
-                    //     plat
-                    string outputPath = AssetBundlesOutputPath;
-                   // outputPath += "/" + Platform.GetPlatformFolder(EditorUserBuildSettings.activeBuildTarget);
+                    AssetBundle ab = AssetBundle.LoadFromFile(Path.Combine(AssetBundlesOutputPath,getPlatformFolder()));
 
-                    AssetBundle ab = AssetBundle.LoadFromFile(outputPath);
                     _manifest = ab.LoadAsset("AssetBundleManifest") as AssetBundleManifest;
                     ab.Unload(false);  //即时释放
                 }
@@ -31,8 +28,9 @@ namespace SimpleFramework
         static string AssetBundlesOutputPath
         {
             get
-            {             
-                return Path.Combine("D:/HotUpdate/ForBuildAssetbundle",getPlatformFolder());
+            {
+                string path = Application.dataPath.Substring(0, Application.dataPath.LastIndexOf('/'));
+                return Path.Combine(path + "/abRes", getPlatformFolder());
             }
         }
         [MenuItem("Tools/BuildAssetBundle")]
@@ -42,15 +40,19 @@ namespace SimpleFramework
             Pack();
             string outputPath = AssetBundlesOutputPath;
             Debug.Log("delete:" + FileUtil.DeleteFileOrDirectory(outputPath));
-            if (!Directory.Exists(outputPath))
-                Directory.CreateDirectory(outputPath);
+            if (Directory.Exists(outputPath))
+                Directory.Delete(outputPath);
+            Directory.CreateDirectory(outputPath);
+            Debug.Log("BuildSourceToAB outputPath = "+outputPath);
             BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.UncompressedAssetBundle, EditorUserBuildSettings.activeBuildTarget);
-            //AssetDatabase.Refresh(ImportAssetOptions.);
+           // AssetDatabase.Refresh(ImportAssetOptions.);
             Debug.Log("打包完成");
             //生成resouceinfo文件
             CreatResourceinfo();
             //生成资源脚本信息
             CreateAssetScriptsRelationFile();
+
+            CopyAbToStreamingAssets();
         }
         [MenuItem("Tools/CreateAssetbundleMakingFolder")]
         public static void Init()
@@ -75,7 +77,7 @@ namespace SimpleFramework
             }
         }
         //对应平台的目录
-        static string getPlatformFolder()
+        public static string getPlatformFolder()
         {
             string targetPlatform = "";
             if (AppConst.IsAndroidPlat) targetPlatform = "Android";
@@ -89,11 +91,11 @@ namespace SimpleFramework
         static void CreatResourceinfo()
         {
             string outputPath = AssetBundlesOutputPath;
-            if (Directory.Exists(outputPath))
-            {
-                Directory.Delete(outputPath, true);
-            }
-            Directory.CreateDirectory(outputPath);
+            //if (Directory.Exists(outputPath))
+            //{
+            //    Directory.Delete(outputPath, true);
+            //}
+            //Directory.CreateDirectory(outputPath);
             Dictionary<string, Hash128> abDic = new Dictionary<string, Hash128>();
 
             GetABInfo(outputPath, ref abDic);
@@ -103,6 +105,7 @@ namespace SimpleFramework
             abConfig.resourceVersion = rinfo.assetVersion;
             Debug.Log(rinfo.assetVersion);
             rinfo.manifestName = outputPath.Substring(outputPath.LastIndexOf("\\") + 1);
+            Debug.Log("manifestname = "+rinfo.manifestName);
             //File.Create(outputPath+"assetResources.txt",
             FileHelper.CreateFile(outputPath, "\\assetVersionInfo.txt", rinfo.ToStr(), false);
             FileHelper.CreateFile(outputPath, "\\abConfig.txt", abConfig.ToString(), false);
@@ -276,31 +279,34 @@ namespace SimpleFramework
         {
             return s.Replace("\\", "/");
         }
-
-        [MenuItem("Tools/testselect")]
-        public static void AutoMakeAB()
+        static void CopyAbToStreamingAssets()
         {
-            WWW www = WWW.LoadFromCacheOrDownload("", 3);
-            UnityEngine.Object[] arr = Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.TopLevel);
-            string dicPath = Application.dataPath.Substring(0, Application.dataPath.LastIndexOf('/')) + "/" + AssetDatabase.GetAssetPath(arr[0]);
-            string[] stra = new string[1];
-            stra[0] = "Assets/";
-            string localPath = "";
-            string bundlePath = "";
-            foreach (string fname in Directory.GetFiles(dicPath))
+            string streamingPath = Application.streamingAssetsPath + "/Assetbundles/" + getPlatformFolder();
+            if (Directory.Exists(streamingPath))
+                Directory.Delete(streamingPath,true);
+            CopyFolderTo(AssetBundlesOutputPath, streamingPath);
+        }
+        //目录文件copy
+        static void CopyFolderTo(string directorySource, string directoryTarget)
+        {
+            //检查是否存在目的目录  
+            if (!Directory.Exists(directoryTarget))
             {
-                string[] aimStr = fname.Split(stra, System.StringSplitOptions.RemoveEmptyEntries);
-                if (aimStr.Length == 2)
-                {
-                    localPath = "Assets/" + aimStr[1];
-                    Object source = AssetDatabase.LoadMainAssetAtPath(localPath);
-                    if (source != null)
-                    {
-                        bundlePath = localPath + "/" + ".unity3d";
-                        //  BuildPipeline.BuildAssetBundles()
-                        // BuildPipeline.BuildAssetBundle(source, null,bundlePath,BuildAssetBundleOptions.CompleteAssets);
-                    }
-                }
+                Directory.CreateDirectory(directoryTarget);
+            }
+            //先来复制文件  
+            DirectoryInfo directoryInfo = new DirectoryInfo(directorySource);
+            FileInfo[] files = directoryInfo.GetFiles();
+            //复制所有文件  
+            foreach (FileInfo file in files)
+            {
+                file.CopyTo(Path.Combine(directoryTarget, file.Name));
+            }
+            //最后复制目录  
+            DirectoryInfo[] directoryInfoArray = directoryInfo.GetDirectories();
+            foreach (DirectoryInfo dir in directoryInfoArray)
+            {
+                CopyFolderTo(Path.Combine(directorySource, dir.Name), Path.Combine(directoryTarget, dir.Name));
             }
         }
     }
