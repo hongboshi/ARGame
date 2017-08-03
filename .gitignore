@@ -4,6 +4,8 @@ Library
 ProjectSettings
 Temp
 abRes
+Packages
+obj
 ARGame\Assets\StreamingAssets\Assetbundles
 *.csproj
 *.sln
