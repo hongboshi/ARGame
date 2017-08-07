@@ -1,0 +1,11 @@
+ManifestFileVersion: 0
+CRC: 2458868746
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: bb.unity3d
+      Dependencies:
+        Dependency_0: game/aa.unity3d
+    Info_1:
+      Name: game/aa.unity3d
+      Dependencies: {}

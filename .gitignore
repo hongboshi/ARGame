@@ -9,3 +9,9 @@ ARGame.Editor.Plugins.csproj
 ARGame.Plugins.csproj
 ARGame.sln
 Publish
+abRes
+Packages
+obj
+ARGame\Assets\StreamingAssets\Assetbundles
+*.csproj
+*.sln

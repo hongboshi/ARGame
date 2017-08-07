@@ -119,6 +119,7 @@ namespace SimpleFramework
             //未找到 则去resource里面取
             Debug.Log("assetName --:" + assetName);
             string abname = abConfig.GetBundlenameByAssetname(assetName);
+
             string fullname = AssetBundleInfo.assetPath_local + "/" + abname;
             Debug.Log("assetbundle path:" + fullname);
             if (abname == "" || !File.Exists(fullname))  //

@@ -52,8 +52,12 @@ public class StartUp : MonoBehaviour {
     bool isResLoadOver = false;
     void OnLoadOver()
     {
-        if(isMovieOver && isResLoadOver)
-            AppFacade.Ins.GetMgr<GameManager>().GetGame(GameEnum.mainLobby).StartUp();
+        AppFacade.Ins.GetMgr<ResourceManager>().LoadAsset("bb", (obj) => {
+            Debug.Log(obj.name);
+            GameObject oo = GameObject.Instantiate(obj) as GameObject;
+        });
+        //if(isMovieOver && isResLoadOver)
+        //    AppFacade.Ins.GetMgr<GameManager>().GetGame(GameEnum.mainLobby).StartUp();
     }
     void OnResLoadOver(params object[] objs)
     {
