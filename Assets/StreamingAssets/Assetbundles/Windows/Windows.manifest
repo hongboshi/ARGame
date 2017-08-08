@@ -1,11 +1,7 @@
 ManifestFileVersion: 0
-CRC: 2458868746
+CRC: 3238643798
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: bb.unity3d
-      Dependencies:
-        Dependency_0: game/aa.unity3d
-    Info_1:
-      Name: game/aa.unity3d
+      Name: canvas.unity3d
       Dependencies: {}

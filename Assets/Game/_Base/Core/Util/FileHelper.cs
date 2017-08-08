@@ -67,6 +67,34 @@ public static class FileHelper
     }
 
     /// <summary>
+    /// 目录拷贝
+    /// </summary>
+    /// <param name="directorySource"></param>
+    /// <param name="directoryTarget"></param>
+    public static void CopyFolderTo(string directorySource, string directoryTarget)
+    {
+        //检查是否存在目的目录  
+        if (!Directory.Exists(directoryTarget))
+        {
+            Directory.CreateDirectory(directoryTarget);
+        }
+        //先来复制文件  
+        DirectoryInfo directoryInfo = new DirectoryInfo(directorySource);
+        FileInfo[] files = directoryInfo.GetFiles();
+        //复制所有文件  
+        foreach (FileInfo file in files)
+        {
+            file.CopyTo(Path.Combine(directoryTarget, file.Name));
+        }
+        //最后复制目录  
+        DirectoryInfo[] directoryInfoArray = directoryInfo.GetDirectories();
+        foreach (DirectoryInfo dir in directoryInfoArray)
+        {
+            CopyFolderTo(Path.Combine(directorySource, dir.Name), Path.Combine(directoryTarget, dir.Name));
+        }
+    }
+
+    /// <summary>
     /// 读取文件.
     /// </summary>
     /// <returns>The file.</returns>
@@ -205,21 +233,6 @@ public static class FileHelper
         //销毁流
         sw.Dispose();
     }
-    ////读取本地AssetBundle文件
-    //static IEnumerator LoadAssetbundleFromLocal(string path, string name)
-    //{
-    //    //("file:///" + path + "/" + name);
-
-    //    WWW w = new WWW("file:///" + path + "/" + name);
-
-    //    yield return w;
-
-    //    if (w.isDone)
-    //    {
-    //         Instantiate(w.assetBundle.mainAsset);
-    //    }
-    //}
-
     /// <summary>
     /// 删除文件.
     /// </summary>

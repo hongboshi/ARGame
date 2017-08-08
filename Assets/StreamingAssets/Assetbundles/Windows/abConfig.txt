@@ -1,1 +1,1 @@
--1|bb.prefab&bb.unity3d,game/aa.mat&game/aa.unity3d,
+-1|canvas.prefab&canvas.unity3d,

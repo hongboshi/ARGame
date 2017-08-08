@@ -284,31 +284,10 @@ namespace SimpleFramework
             string streamingPath = Application.streamingAssetsPath + "/Assetbundles/" + getPlatformFolder();
             if (Directory.Exists(streamingPath))
                 Directory.Delete(streamingPath,true);
-            CopyFolderTo(AssetBundlesOutputPath, streamingPath);
+            FileHelper.CopyFolderTo(AssetBundlesOutputPath, streamingPath);
         }
-        //目录文件copy
-        static void CopyFolderTo(string directorySource, string directoryTarget)
-        {
-            //检查是否存在目的目录  
-            if (!Directory.Exists(directoryTarget))
-            {
-                Directory.CreateDirectory(directoryTarget);
-            }
-            //先来复制文件  
-            DirectoryInfo directoryInfo = new DirectoryInfo(directorySource);
-            FileInfo[] files = directoryInfo.GetFiles();
-            //复制所有文件  
-            foreach (FileInfo file in files)
-            {
-                file.CopyTo(Path.Combine(directoryTarget, file.Name));
-            }
-            //最后复制目录  
-            DirectoryInfo[] directoryInfoArray = directoryInfo.GetDirectories();
-            foreach (DirectoryInfo dir in directoryInfoArray)
-            {
-                CopyFolderTo(Path.Combine(directorySource, dir.Name), Path.Combine(directoryTarget, dir.Name));
-            }
-        }
+
+
     }
 }
 
