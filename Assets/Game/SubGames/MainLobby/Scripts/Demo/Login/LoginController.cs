@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SimpleFramework;
+using SimpleFramework.Game;
+
 public class LoginController :Controller
 {
     protected override void AddViewListenner()
@@ -42,7 +44,8 @@ public class LoginController :Controller
         if (result)
         {
             ModelManager.GetModel<LoginModel>().SetAccPwd("ss", "dd");
-            AppFacade.Ins.GetMgr<SceneMgr>().LoadScene("main");
+            // AppFacade.Ins.GetMgr<SceneMgr>().LoadScene("main");  
+            IGameBase.NowActiveGame.LoadScene(0);
         }
         else
         { }

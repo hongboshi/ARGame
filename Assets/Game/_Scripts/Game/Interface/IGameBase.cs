@@ -30,15 +30,29 @@ namespace SimpleFramework.Game
     /// </summary>
     public abstract class IGameBase
     {
-        internal static IGameBase NowActiveGame = null;                        
+        internal static IGameBase NowActiveGame = null;
         protected GameType gType { get; private set; }             //游戏类型
         protected string gameName { get; }                         //游戏名称
-        protected abstract string[] sceneName { get;}             //游戏场景
+        protected abstract string[] sceneName { get; }             //游戏场景
         public IGameBase(GameType type, string name)
         {
             gType = type;
             this.gameName = name;
             RegiestScene();
+        }
+
+        public void LoadScene(string name)
+        {
+            AppFacade.Ins.GetMgr<SceneMgr>().LoadScene(name);
+        }
+
+        public void LoadScene(int index)
+        {
+            if (index < 0 || index > sceneName.Length - 1)
+            {
+                Debug.LogError("load scene is out of arry");
+            }
+            LoadScene(sceneName[index]);
         }
 
         protected virtual void RegiestScene()
@@ -67,7 +81,8 @@ namespace SimpleFramework.Game
             else if (NowActiveGame != null) NowActiveGame.UnLoad();          
             //   else  NowActiveGame?.UnLoad();    //unity版本得支持c#4.0以上
             NowActiveGame = this;
-            AppFacade.Ins.GetMgr<SceneMgr>().LoadScene(sceneName[0]);
+            LoadScene(0);
+           // AppFacade.Ins.GetMgr<SceneMgr>().LoadScene(sceneName[0]);
             OnStartUp(param);
             Debug.Log("启动游戏" + gameName);    
         }
