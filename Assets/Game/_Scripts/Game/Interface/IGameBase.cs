@@ -13,9 +13,8 @@ namespace SimpleFramework.Game
     //游戏枚举
     public class GameEnum
     {
-        
         public const string mainLobby = "game_mainLobby";
-        public const string a = "game_a";
+        public const string SeaFish = "game_SeaFish";
         public const string b = "game_b";
         public const string c = "game_c";
         public const string d = "game_d";
@@ -24,12 +23,14 @@ namespace SimpleFramework.Game
         public const string g = "game_g";
         public const string h = "game_h";
         public const string i = "game_i";
+
     }
     /// <summary>
     /// 每一个游戏demo对应一个gamebase
     /// </summary>
     public abstract class IGameBase
     {
+        static string preGameName = "";
         internal static IGameBase NowActiveGame = null;
         protected GameType gType { get; private set; }             //游戏类型
         protected string gameName { get; }                         //游戏名称
@@ -40,12 +41,18 @@ namespace SimpleFramework.Game
             this.gameName = name;
             RegiestScene();
         }
-
+        //返回上一个游戏
+        public void GoBack()
+        {
+            if (preGameName != "")
+                AppFacade.Ins.GetMgr<GameManager>().GetGame(preGameName).StartUp();
+        }
+        //加载游戏内场景
         public void LoadScene(string name)
         {
             AppFacade.Ins.GetMgr<SceneMgr>().LoadScene(name);
         }
-
+        //加载游戏内场景
         public void LoadScene(int index)
         {
             if (index < 0 || index > sceneName.Length - 1)
@@ -54,7 +61,7 @@ namespace SimpleFramework.Game
             }
             LoadScene(sceneName[index]);
         }
-
+        //场景状态注册
         protected virtual void RegiestScene()
         {
             for (int i = 0; i < sceneName.Length; i++)
@@ -94,6 +101,7 @@ namespace SimpleFramework.Game
         //卸载
         internal void UnLoad()
         {
+            preGameName = gameName;
             Debug.Log("卸载游戏" + gameName);
             UnRegiestScene();
             OnUnLoad();

@@ -35,7 +35,11 @@ namespace SimpleFramework
 
         public virtual void StateUpdate()
         {
-
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                Debug.Log("lllllll");
+                SimpleFramework.Game.IGameBase.NowActiveGame.GoBack();
+            }
         }
 
         public override string ToString()
@@ -87,6 +91,9 @@ namespace SimpleFramework
             SceneManager.LoadScene("loading");
         }
         void StateUpdate()
-        { }
+        {
+            if (m_State != null)
+                m_State.StateUpdate();
+        }
     }
 }

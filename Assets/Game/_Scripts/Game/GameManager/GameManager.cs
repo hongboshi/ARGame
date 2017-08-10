@@ -16,7 +16,7 @@ namespace SimpleFramework.Game
         {
             gameDic = new Dictionary<string, IGameBase>();
             gameDic.Add(GameEnum.mainLobby, new Game_MainLobby(GameType.NonAR, GameEnum.mainLobby));
-         //   gameDic.Add(GameEnum.a, new Game_a(GameType.NonAR, GameEnum.a));  //每新增加一个游戏 需在此声明一次
+            gameDic.Add(GameEnum.SeaFish, new Game_SeaFish(GameType.NonAR, GameEnum.SeaFish));  //每新增加一个游戏 需在此声明一次
             //gameDic.Add(GameEnum.b, new Game_b(GameType.NonAR, GameEnum.b));
             //gameDic.Add(GameEnum.c, new Game_c(GameType.NonAR, GameEnum.c));
             //gameDic.Add(GameEnum.d, new Game_d(GameType.NonAR, GameEnum.d));

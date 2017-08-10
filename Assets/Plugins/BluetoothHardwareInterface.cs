@@ -416,6 +416,7 @@ public class BluetoothLEHardwareInterface
 		if (!Application.isEditor)
 		{
 			if (bluetoothDeviceScript != null)
+
 			{
 				name = name.ToUpper ();
 				service = service.ToUpper ();
